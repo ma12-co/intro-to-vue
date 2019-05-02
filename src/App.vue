@@ -9,6 +9,15 @@
         <h1>{{ product }}</h1>
         <p>{{ description }}</p>
         <a :href="link">Visit</a>
+        <p v-if="inventory > 10">In stock</p>
+        <p v-else-if="inventory <= 10 && inventory >0">Almost sold out!</p>
+        <p v-if="inventory === 0">Out of stock</p>
+        <ul>
+          <li :key="detail" v-for="detail in details">{{detail}}</li>
+        </ul>
+        <div :key='variant' v-for="variant in variants">
+          <p>{{variant.variantColor}}</p>
+        </div>
       </div>
     </div>
 
@@ -25,7 +34,19 @@
         product: "socks",
         description: "these guys feel really comfortable",
         image: require('./assets/vmSocks-green.jpg'),
-        link: "https://heybuddy"
+        link: "https://heybuddy",
+        inventory: 3,
+        details: ['80% cotton', '20% polyester', 'Gender-neutral'],
+        variants: [
+          {
+            variantId: 2234,
+            variantColor: 'green'
+          },
+          {
+            variantId: 2235,
+            variantColor: 'blue'
+          }
+        ]
       }
     },
     components: {
