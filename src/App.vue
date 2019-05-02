@@ -16,7 +16,11 @@
           <li :key="detail" v-for="detail in details">{{detail}}</li>
         </ul>
         <div :key='variant' v-for="variant in variants">
-          <p>{{variant.variantColor}}</p>
+          <p @mouseover="updateProduct(variant.variantImage)">{{variant.variantColor}}</p>
+        </div>
+        <button v-on:click="addToCart">Add to cart</button>
+        <div class="cart">
+          <p>Cart({{cart}})</p>
         </div>
       </div>
     </div>
@@ -40,14 +44,24 @@
         variants: [
           {
             variantId: 2234,
-            variantColor: 'green'
+            variantColor: 'green',
+            variantImage: require('./assets/vmSocks-green.jpg')
           },
           {
             variantId: 2235,
-            variantColor: 'blue'
+            variantColor: 'blue',
+            variantImage: require('./assets/vmSocks-blue.jpg')
+
           }
-        ]
+        ],
+        cart: 0
       }
+    },
+    methods: {
+      addToCart: function() {
+        this.cart++
+      },
+      updateProduct: function(variantImage)  {this.image = variantImage}
     },
     components: {
       HelloWorld
