@@ -4,7 +4,11 @@
     <Product 
     :isPremium="isPremium" 
     :details="details"
+    @add-to-cart="updateCart"
     />
+    <div class="cart">
+          <p>Cart({{cart}})</p>
+        </div>
   </div>
   
 </template>
@@ -17,11 +21,15 @@
     name: 'app',
     data() {
       return {
-        isPremium : {
-          type: Boolean,
-          required: true
-        },
+        isPremium : false,
         details: ['80% cotton', '20% polyester', 'Gender-neutral'],
+        cart: []
+      }
+    },
+    methods: {
+      updateCart(id) {
+        this.cart.push(id)
+        console.log(id)
       }
     },
     components: {

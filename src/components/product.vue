@@ -10,7 +10,7 @@
         <p 
         v-if="inventory === 0"
         >Out of stock</p>
-        <p>User is premium: {{isPremium.required}}</p>
+        <p>User is premium: {{isPremium}}</p>
         <ul>
           <li :key="detail" v-for="detail in details">{{detail}}</li>
         </ul>
@@ -28,9 +28,7 @@
         :disabled="!inStock"
         :class="{ disabledButton : !inStock}">
         Add to cart</button>
-        <div class="cart">
-          <p>Cart({{cart}})</p>
-        </div>
+        
       </div>
     </div>
 </template>
@@ -61,12 +59,12 @@ export default {
 
           }
         ],
-        cart: 0
+        
       }
     },
     methods: {
-      addToCart: function() {
-        this.cart++
+      addToCart() {
+        this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId)
       },
       updateProduct: function(index)  {this.selectedVariant = index
       }
