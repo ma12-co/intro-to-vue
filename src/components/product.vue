@@ -30,10 +30,14 @@
         Add to cart</button>
         
       </div>
+            <ProductReview />
+
     </div>
 </template>
 
 <script>
+import ProductReview from "./ProductReview.vue"
+
 
 export default {
   name: 'Product',
@@ -83,7 +87,10 @@ export default {
   props: [
     'isPremium',
     'details'
-  ]
+  ],
+  components: {
+    ProductReview
+  }
 }
 </script>
 

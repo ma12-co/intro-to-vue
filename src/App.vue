@@ -11,6 +11,7 @@
         </div>
   </div>
   
+  
 </template>
 
 <script>
@@ -33,7 +34,7 @@
       }
     },
     components: {
-      Product
+      Product,
     }
   }
 </script>
