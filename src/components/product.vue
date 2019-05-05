@@ -5,11 +5,8 @@
       </div>
       <div class="product-info">
         <h1>{{ title }}</h1>
-        <p v-if="inventory > 10">In stock</p>
-        <p v-else-if="inventory <= 10 && inventory >0">Almost sold out!</p>
-        <p 
-        v-if="inventory === 0"
-        >Out of stock</p>
+        <p v-if="inStock">In stock</p>
+        <p v-if="!inStock">Out of stock</p>
         <p>User is premium: {{isPremium}}</p>
         <ul>
           <li :key="detail" v-for="detail in details">{{detail}}</li>
@@ -30,7 +27,7 @@
         Add to cart</button>
         
       </div>
-            <ProductReview />
+      <ProductReview />
 
     </div>
 </template>
