@@ -27,7 +27,21 @@
         Add to cart</button>
         
       </div>
-      <ProductReview />
+
+      <div>
+        <h2>Reviews</h2>
+        <p v-if="!reviews.length">There are no reviews yet.</p>
+        <ul>
+          <li :key="review" v-for="review in reviews">
+          <p>{{review.name}}</p> 
+          <p>Rating: {{review.rating}}</p>  
+          <p>{{review.review}}</p>  
+            
+          </li>
+        </ul>
+      </div>
+
+      <ProductReview @review-submitted="addReview"/>
 
     </div>
 </template>
@@ -60,6 +74,7 @@ export default {
 
           }
         ],
+        reviews:[]
         
       }
     },
@@ -68,6 +83,9 @@ export default {
         this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId)
       },
       updateProduct: function(index)  {this.selectedVariant = index
+      },
+      addReview(ProductReview) {
+        this.reviews.push(ProductReview)
       }
     },
     computed: {
