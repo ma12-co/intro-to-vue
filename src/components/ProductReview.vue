@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import {EventBus} from "./EventBus.js"
 export default {
   name: "ProductReview",
 
@@ -49,7 +50,7 @@ export default {
           review: this.review,
           rating: this.rating
         };
-        this.$emit("review-submitted", ProductReview);
+        EventBus.$emit("review-submitted", ProductReview);
         this.name = null;
         this.review = null;
         this.rating = null;
@@ -60,6 +61,9 @@ export default {
         if(!this.rating) this.errors.push("Rating required")
       }
     }
+  },
+  components: {
+    EventBus
   }
 };
 </script>

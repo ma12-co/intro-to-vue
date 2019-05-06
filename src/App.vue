@@ -15,7 +15,7 @@
 </template>
 
 <script>
-
+  
   import Product from "./components/product.vue"
 
   export default {

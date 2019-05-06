@@ -9,11 +9,11 @@
         <p v-if="!inStock">Out of stock</p>
         <p>User is premium: {{isPremium}}</p>
         <ul>
-          <li :key="detail" v-for="detail in details">{{detail}}</li>
+          <li :key="`${detail}-${index}`" v-for="(detail, index) in details">{{detail}}</li>
         </ul>
 
         <div 
-          :key='variant' 
+          :key='`${variant}-${index}`' 
           v-for="(variant, index) in variants"
           class="color-box"
           :style="{ backgroundColor: variant.variantColor }"
@@ -28,27 +28,16 @@
         
       </div>
 
-      <div>
-        <h2>Reviews</h2>
-        <p v-if="!reviews.length">There are no reviews yet.</p>
-        <ul>
-          <li :key="review" v-for="review in reviews">
-          <p>{{review.name}}</p> 
-          <p>Rating: {{review.rating}}</p>  
-          <p>{{review.review}}</p>  
-            
-          </li>
-        </ul>
-      </div>
+      <ProductTabs :reviews="reviews"/>
 
-      <ProductReview @review-submitted="addReview"/>
+      
 
     </div>
 </template>
 
 <script>
-import ProductReview from "./ProductReview.vue"
-
+import ProductTabs from "./ProductTabs.vue"
+import {EventBus} from "./EventBus.js"
 
 export default {
   name: 'Product',
@@ -84,9 +73,7 @@ export default {
       },
       updateProduct: function(index)  {this.selectedVariant = index
       },
-      addReview(ProductReview) {
-        this.reviews.push(ProductReview)
-      }
+      
     },
     computed: {
       title() {
@@ -104,8 +91,14 @@ export default {
     'details'
   ],
   components: {
-    ProductReview
-  }
+    EventBus,
+    ProductTabs
+  },
+  mounted() {
+    EventBus.$on('revew-submitted', ProductReview => {
+      this.reviews.push(ProductReview)
+    })
+  },
 }
 </script>
 
